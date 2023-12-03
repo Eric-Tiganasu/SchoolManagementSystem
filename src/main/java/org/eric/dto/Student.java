@@ -14,11 +14,14 @@ public class Student {
     private Course[] courses;
     private String fname;
     private String lname;
+    private Department department;
 
-    public Student(String fname, String lname) {
+
+    public Student(String fname, String lname, Department departmentName) {
         this.id = String.format("S%03d", nextId++);
         this.fname = fname;
         this.lname = lname;
-        this.courses = new Course[0];
+        this.department = departmentName;
+
     }
 }
