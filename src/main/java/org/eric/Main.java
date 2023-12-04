@@ -12,7 +12,13 @@ public class Main {
 
         system.addDepartment("Computers");
         system.addDepartment("Medicine");
+        system.addTeacher("Yi", "Wang");
+        system.addStudent("Laurie", "Chammah", "D001");
+        system.addCourse("Programming", 3.0);
+        System.out.println(system.findDepartment("D001"));
         system.findDepartments();
+        system.printStudents();
+        system.printTeachers();
 
     }
 }

@@ -20,13 +20,21 @@ public class SchoolManagementSystem {
 
     private int departmentCount = 0;
     private int studentCount = 0;
-//    /**
-//     * Finds a department based on its id
-//     * @return specified department
-//     */
-//    public Department findDepartment() {
-//
-//    }
+    private int teacherCount = 0;
+    private int courseCount = 0;
+
+    /**
+     * Finds a department based on its id
+     * @return specified department
+     */
+    public Department findDepartment(String id) {
+        for (Department department : departments) {
+            if (id.equals(department.getId())) {
+                return department;
+            }
+        }
+        return null;
+    }
 
     /**
      * Displays the teachers
@@ -86,8 +94,15 @@ public class SchoolManagementSystem {
     /**
      * Adds a course
      */
-    public void addCourse() {
+    public void addCourse(String courseName, double credit) {
+        if (courseCount < MAX_COURSES) {
+            courses[courseCount] = new Course(courseName, 3.0);
 
+            System.out.println(courses[courseCount] + " added successfully.");
+            teacherCount++;
+        } else {
+            System.out.println("Max teacher reached, add a new teacher failed.");
+        }
     }
 
     /**
@@ -100,8 +115,15 @@ public class SchoolManagementSystem {
     /**
      * Adds a new teacher
      */
-    public void addTeacher() {
+    public void addTeacher(String fname, String lname) {
+        if (teacherCount < MAX_TEACHERS) {
+            teachers[teacherCount] = new Teacher(fname, lname);
 
+            System.out.println(teachers[teacherCount] + " added successfully.");
+            teacherCount++;
+        } else {
+            System.out.println("Max teacher reached, add a new teacher failed.");
+        }
     }
 
 //    /**
@@ -128,9 +150,9 @@ public class SchoolManagementSystem {
     /**
      * Adds a new student
      */
-    public void addStudent(String fname, String lname, Department departmentName) {
+    public void addStudent(String fname, String lname, String id) {
         if (studentCount < MAX_STUDENTS) {
-            students[studentCount] = new Student(fname, lname, departmentName);
+            students[studentCount] = new Student(fname, lname, findDepartment(id));
 
             System.out.println(students[studentCount] + " added successfully.");
             studentCount++;

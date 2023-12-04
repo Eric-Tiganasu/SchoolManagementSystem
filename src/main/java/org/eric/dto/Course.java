@@ -13,13 +13,13 @@ public class Course {
     private String courseName;
     private Teacher teacher;
     private Student[] students;
+    private double credit;
     private Department department;
 
-    public Course(String courseName, Department department) {
+    public Course(String courseName, double credit) {
         this.id = String.format("C%03d", nextId++);
         this.courseName = courseName;
-        this.department = department;
-        this.teacher = teacher;
+        this.credit = credit;
         this.students = new Student[MAX_STUDENT_NUM];
     }
 
@@ -37,9 +37,10 @@ public class Course {
 
         return "Course(" +
                 "id=" + id + ", " +
-                "department=" + department + ", " +
-                "teacher=" + teacher + ", " +
                 "courseName=" + courseName + ", " +
+                "credit=" + credit + ", " +
+                "teacher=" + teacher + ", " +
+                "department=" + department + ", " +
                 "students=" + studentStr +
                 ')';
     }
