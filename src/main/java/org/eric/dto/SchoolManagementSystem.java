@@ -83,25 +83,30 @@ public class SchoolManagementSystem {
         }
     }
 
-//    /**
-//     * Finds student based on its id
-//     * @return specified student
-//     */
-//    public Student findStudent() {
-//
-//    }
+    /**
+     * Finds student based on its id
+     * @return specified student
+     */
+    public Student findStudent(String id) {
+        for (Student student : students) {
+            if (id.equals(student.getId())) {
+                return student;
+            }
+        }
+        return null;
+    }
 
     /**
      * Adds a course
      */
-    public void addCourse(String courseName, double credit) {
+    public void addCourse(String courseName, double credit, String id) {
         if (courseCount < MAX_COURSES) {
-            courses[courseCount] = new Course(courseName, 3.0);
+            courses[courseCount] = new Course(courseName, 3.0, findDepartment(id));
 
             System.out.println(courses[courseCount] + " added successfully.");
             teacherCount++;
         } else {
-            System.out.println("Max teacher reached, add a new teacher failed.");
+            System.out.println("Max course reached, add a new course failed.");
         }
     }
 
@@ -115,9 +120,9 @@ public class SchoolManagementSystem {
     /**
      * Adds a new teacher
      */
-    public void addTeacher(String fname, String lname) {
+    public void addTeacher(String fname, String lname, String id) {
         if (teacherCount < MAX_TEACHERS) {
-            teachers[teacherCount] = new Teacher(fname, lname);
+            teachers[teacherCount] = new Teacher(fname, lname, findDepartment(id));
 
             System.out.println(teachers[teacherCount] + " added successfully.");
             teacherCount++;
@@ -126,13 +131,18 @@ public class SchoolManagementSystem {
         }
     }
 
-//    /**
-//     * Finds a course based on its id
-//     * @return specified course
-//     */
-//    public Course findCourse() {
-//
-//    }
+    /**
+     * Finds a course based on its id
+     * @return specified course
+     */
+    public Course findCourse(String id) {
+        for (Course course : courses) {
+            if (id.equals(course.getId())) {
+                return course;
+            }
+        }
+        return null;
+    }
 
     /**
      * Displays all departments
@@ -161,11 +171,16 @@ public class SchoolManagementSystem {
         }
     }
 
-//    /**
-//     * Finds a teacher based on its id
-//     * @return specified teacher
-//     */
-//    public Teacher findTeacher() {
-//
-//    }
+    /**
+     * Finds a teacher based on its id
+     * @return specified teacher
+     */
+    public Teacher findTeacher(String id) {
+        for (Teacher teacher : teachers) {
+            if (id.equals(teacher.getId())) {
+                return teacher;
+            }
+        }
+        return null;
+    }
 }

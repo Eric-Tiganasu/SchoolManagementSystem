@@ -1,5 +1,6 @@
 package org.eric.dto;
 
+import lombok.Getter;
 import lombok.ToString;
 
 /**
@@ -7,6 +8,7 @@ import lombok.ToString;
  * The student class
  */
 @ToString
+@Getter
 public class Student {
     private String id;
     private static int nextId = 1;

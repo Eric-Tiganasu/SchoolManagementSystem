@@ -1,11 +1,12 @@
 package org.eric.dto;
 
-import lombok.ToString;
+import lombok.Getter;
 
 /**
  * @author Eric Tiganasu
  * The course class
  */
+@Getter
 public class Course {
     private String id;
     private static int nextId = 1;
@@ -16,10 +17,11 @@ public class Course {
     private double credit;
     private Department department;
 
-    public Course(String courseName, double credit) {
+    public Course(String courseName, double credit, Department department) {
         this.id = String.format("C%03d", nextId++);
         this.courseName = courseName;
         this.credit = credit;
+        this.department = department;
         this.students = new Student[MAX_STUDENT_NUM];
     }
 
