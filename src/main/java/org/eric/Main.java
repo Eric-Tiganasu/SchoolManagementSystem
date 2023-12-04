@@ -11,8 +11,8 @@ public class Main {
         SchoolManagementSystem system = new SchoolManagementSystem();
 
         system.addDepartment("Computers");
-        system.addStudent("Laurie", "Chammah", "Computers");
-        System.out.println(system);
+        system.addDepartment("Medicine");
+        system.findDepartments();
 
     }
 }

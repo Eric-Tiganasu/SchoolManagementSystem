@@ -27,9 +27,11 @@ public class Course {
     public String toString() {
         StringBuilder studentStr = new StringBuilder("[");
         for (Student student : students) {
-            if (student != null) {
-                studentStr.append(student).append(", ");
+            if (student == null) {
+                continue;
             }
+
+            studentStr.append(student).append(", ");
         }
         studentStr.append("]");
 

@@ -32,7 +32,13 @@ public class SchoolManagementSystem {
      * Displays the teachers
      */
     public void printTeachers() {
+        for (Teacher teacher : teachers) {
+            if (teacher == null) {
+                continue;
+            }
 
+            System.out.println(teacher);
+        }
     }
 
     /**
@@ -60,7 +66,13 @@ public class SchoolManagementSystem {
      * Displays all the students
      */
     public void printStudents() {
+        for (Student student : students) {
+            if (student == null) {
+                continue;
+            }
 
+            System.out.println(student);
+        }
     }
 
 //    /**
@@ -104,7 +116,13 @@ public class SchoolManagementSystem {
      * Displays all departments
      */
     public void findDepartments() {
+        for (Department department : departments) {
+            if (department == null) {
+                continue;
+            }
 
+            System.out.println(department);
+        }
     }
 
     /**

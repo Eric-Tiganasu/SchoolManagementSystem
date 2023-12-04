@@ -1,12 +1,9 @@
 package org.eric.dto;
 
-import lombok.ToString;
-
 /**
  * @author Eric Tiganasu
  * The student class
  */
-@ToString
 public class Student {
     private String id;
     private static int nextId = 1;
@@ -22,6 +19,5 @@ public class Student {
         this.fname = fname;
         this.lname = lname;
         this.department = departmentName;
-
     }
 }
