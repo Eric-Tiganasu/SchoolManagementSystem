@@ -1,12 +1,17 @@
 package org.eric.dto;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * @author Eric Tiganasu
  * The course class
  */
 @Getter
+@Setter
+@EqualsAndHashCode
 public class Course {
     private String id;
     private static int nextId = 1;
