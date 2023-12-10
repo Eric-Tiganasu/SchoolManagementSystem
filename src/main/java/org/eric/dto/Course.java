@@ -1,9 +1,7 @@
 package org.eric.dto;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 /**
  * @author Eric Tiganasu
@@ -11,7 +9,6 @@ import lombok.ToString;
  */
 @Getter
 @Setter
-@EqualsAndHashCode
 public class Course {
     private String id;
     private static int nextId = 1;
@@ -30,17 +27,30 @@ public class Course {
         this.students = new Student[MAX_STUDENT_NUM];
     }
 
-    @Override
-    public String toString() {
+    /**
+     * Makes the student array to a string. I made this method because by putting it in the
+     * actual toString() method, there will be a stackOverflowError. By putting it outside of
+     * that method, I can simply use it inside without there being an error.
+     * @return studentStr
+     */
+    public StringBuilder studentStr() {
         StringBuilder studentStr = new StringBuilder("[");
+
         for (Student student : students) {
             if (student == null) {
                 continue;
             }
 
-            studentStr.append(student).append(", ");
+            studentStr.append(student.getFname()).append(" ").append(student.getLname()).append(", ");
         }
+
         studentStr.append("]");
+
+        return studentStr;
+    }
+
+    @Override
+    public String toString() {
 
         return "Course(" +
                 "id=" + id + ", " +
@@ -48,7 +58,7 @@ public class Course {
                 "credit=" + credit + ", " +
                 "teacher=" + teacher + ", " +
                 "department=" + department + ", " +
-                "students=" + studentStr +
+                "students=" + studentStr() +
                 ')';
     }
 }

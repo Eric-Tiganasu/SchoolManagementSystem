@@ -13,6 +13,7 @@ public class SchoolManagementSystem {
     private static final int MAX_TEACHERS = 20;
     private static final int MAX_COURSES = 30;
     private static final int MAX_COURSES_PER_STUDENT = 5;
+    private static final int MAX_STUDENTS_PER_COURSE = 5;
 
     private Student[] students = new Student[MAX_STUDENTS];
     private Department[] departments = new Department[MAX_DEPARTMENTS];
@@ -59,7 +60,7 @@ public class SchoolManagementSystem {
     public void modifyCourseTeacher(String courseId, String teacherId) {
         if (findTeacher(teacherId) == null) {
             System.out.printf("Cannot find any teacher match with teacherId %s, modify teacher for course %s failed.\n",
-                    teacherId, teacherId);
+                    teacherId, courseId);
         } else if (findCourse(courseId) == null) {
             System.out.printf("Cannot find any course match with courseId %s, modify teacher for course %s failed.\n",
                     courseId, courseId);
@@ -120,10 +121,10 @@ public class SchoolManagementSystem {
      */
     public void addCourse(String courseName, double credit, String departmentId) {
         if (courseCount < MAX_COURSES) {
-            courses[courseCount] = new Course(courseName, 3.0, findDepartment(departmentId));
+            courses[courseCount] = new Course(courseName, credit, findDepartment(departmentId));
 
             System.out.println(courses[courseCount] + " added successfully.");
-            teacherCount++;
+            courseCount++;
         } else {
             System.out.println("Max course reached, add a new course failed.");
         }
@@ -135,32 +136,33 @@ public class SchoolManagementSystem {
     public void registerCourse(String studentId, String courseId) {
         Student student = findStudent(studentId);
         Course course = findCourse(courseId);
-        Course[] studentCourses = student.getCourses();
-        Student[] courseStudents = course.getStudents();
 
         if (student == null) {
-            System.out.printf("Cannot find any student match with studentId %s, register course for student %s" +
+            System.out.printf("Cannot find any student match with studentId %s, register course for student %s " +
                     "failed.\n", studentId, studentId);
         } else if (course == null) {
             System.out.printf("Cannot find any course match with courseId %s, register course for student %s " +
                     "failed.\n", courseId, studentId);
         } else if (student.getCourses().length > MAX_COURSES_PER_STUDENT) {
             System.out.printf("Student %s has already registered 5 courses, register course for student %s " +
-                    "failed.",studentId, studentId);
-        } else if (course.getStudents().length > 5) {
-            System.out.printf("Course %s has been fully registered, register course %s for student %s failed.",
+                    "failed.\n",studentId, studentId);
+        } else if (course.getStudents().length > MAX_STUDENTS_PER_COURSE) {
+            System.out.printf("Course %s has been fully registered, register course %s for student %s failed.\n",
                     courseId, courseId, studentId);
         } else {
+            Course[] studentCourses = student.getCourses();
+            Student[] courseStudents = course.getStudents();
+
             for (int i = 0; i < studentCourses.length; i++) {
                 if (studentCourses[i] == null) {
                     studentCourses[i] = course;
+                    break;
+                }
+            }
 
-                    for (int j = 0; j < courseStudents.length; j++) {
-                        if (courseStudents[j] == null) {
-                            courseStudents[j] = student;
-                            break;
-                        }
-                    }
+            for (int i = 0; i < courseStudents.length; i++) {
+                if (courseStudents[i] == null) {
+                    courseStudents[i] = student;
                     break;
                 }
             }
@@ -211,6 +213,22 @@ public class SchoolManagementSystem {
             }
 
             System.out.println(department);
+        }
+    }
+
+    /**
+     * Displays all courses
+     */
+    public void findCourses() {
+        System.out.println("Displaying all courses:");
+        System.out.println("----------------");
+
+        for (Course course : courses) {
+            if (course == null) {
+                continue;
+            }
+
+            System.out.println(course);
         }
     }
 
